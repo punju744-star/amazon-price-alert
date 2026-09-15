@@ -5,14 +5,6 @@ from bs4 import BeautifulSoup
 
 PRODUCTS = [
     {
-        "url": "https://www.amazon.in/dp/B0CG3D9F6G",
-        "target": 4000,
-    },
-    {
-        "url": "https://www.amazon.in/dp/B00A2EPT8W",
-        "target": 2000,
-    },
-    {
         "url": "https://www.amazon.in/dp/B0099M2IQY",
         "target": 2000,
     },
