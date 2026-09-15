@@ -20,8 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install playwright
-          playwright install chromium
+          pip install requests beautifulsoup4
 
       - name: Check Amazon prices
         env:
