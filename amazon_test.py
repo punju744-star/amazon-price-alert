@@ -1,6 +1,6 @@
 import requests
 
-url = "https://www.amazon.in/dp/B0CG3D9F6G"
+url = "https://www.amazon.in/dp/B0099M2IQY"
 
 headers = {
     "User-Agent": (
