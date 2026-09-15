@@ -1,26 +1,26 @@
-import requests
+from playwright.sync_api import sync_playwright
 
 url = "https://www.amazon.in/dp/B0099M2IQY"
 
-headers = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/140.0.0.0 Safari/537.36"
-    ),
-    "Accept-Language": "en-IN,en;q=0.9",
-}
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=True)
 
-response = requests.get(
-    url,
-    headers=headers,
-    timeout=30,
-    allow_redirects=True,
-)
+    page = browser.new_page(
+        user_agent=(
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/140.0.0.0 Safari/537.36"
+        ),
+        locale="en-IN",
+    )
 
-print("Status:", response.status_code)
-print("Final URL:", response.url)
-print("Page length:", len(response.text))
+    page.goto(url, wait_until="domcontentloaded", timeout=60000)
 
-print("\nFirst 1000 characters:\n")
-print(response.text[:1000])
+    print("Final URL:", page.url)
+    print("Page title:", page.title())
+    print("Page length:", len(page.content()))
+
+    print("\nPage text preview:\n")
+    print(page.locator("body").inner_text()[:2000])
+
+    browser.close()
